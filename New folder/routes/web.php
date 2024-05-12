@@ -4,6 +4,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartLastController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -23,19 +24,22 @@ Paginator::useBootstrap();
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::resources([
+    'admin_user' => UserController::class,
+]);
 
-Route::get('/{page?}',[HomeController::class,'index']);
-Route::get('/single-product/{product}',[HomeController::class,'product'])->name('single.product');
-Route::get('/latest-product/{latestproducts}',[HomeController::class,'latestproducts'])->name('latest.product');
-Route::get('/category-product/{categoryproducts}',[HomeController::class,'categoryproducts'])->name('category');
-Route::get('/product-category/{productcategory}',[HomeController::class,'productcategory'])->name('product.category');
-Route::get('/topsellers-product/{topselersproducts}',[HomeController::class,'topselersproducts'])->name('topsellers.product');
-Route::get('/search-product/{searchproduct}',[HomeController::class,'searchproduct'])->name('timkiem.product');
-Route::post('/cart/{add}',[CartController::class,'add'])->name('cart.add');
-Route::get('/cart/{listproduct}',[CartController::class,'listproduct'])->name('cart.product');
+Route::get('/{page?}', [HomeController::class, 'index']);
+Route::get('/single-product/{product}', [HomeController::class, 'product'])->name('single.product');
+Route::get('/latest-product/{latestproducts}', [HomeController::class, 'latestproducts'])->name('latest.product');
+Route::get('/category-product/{categoryproducts}', [HomeController::class, 'categoryproducts'])->name('category');
+Route::get('/product-category/{productcategory}', [HomeController::class, 'productcategory'])->name('product.category');
+Route::get('/topsellers-product/{topselersproducts}', [HomeController::class, 'topselersproducts'])->name('topsellers.product');
+Route::get('/search-product/{searchproduct}', [HomeController::class, 'searchproduct'])->name('timkiem.product');
+Route::post('/cart/{add}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/{listproduct}', [CartController::class, 'listproduct'])->name('cart.product');
 
-Route::post('/cart/{addlast}',[CartLastController::class,'addlast'])->name('cart.addlast');
-Route::get('/cart/{listlastproduct}',[CartLastController::class,'listlastproduct'])->name('cart.lastproduct');
+Route::post('/cart/{addlast}', [CartLastController::class, 'addlast'])->name('cart.addlast');
+Route::get('/cart/{listlastproduct}', [CartLastController::class, 'listlastproduct'])->name('cart.lastproduct');
 
 //Admin
 Route::middleware('auth')->group(function () {
@@ -50,7 +54,7 @@ Route::middleware('auth')->group(function () {
     // Route để hiển thị form sửa sản phẩm
     Route::get('/admin_product/{id}/edit', [ProductController::class, 'edit'])->name('admin_product.edit');
 
-     // Route để hiển thị form view sản phẩm
+    // Route để hiển thị form view sản phẩm
     Route::get('/admin_product/{product}', [ProductController::class, 'show'])->name('admin_product.show');
 
     // Route để cập nhật sản phẩm sau khi chỉnh sửa
@@ -90,8 +94,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/logo-product/{logoproduct}',[HomeController::class,'logoproduct'])->name('logo.product');
-require __DIR__.'/auth.php';
+Route::get('/logo-product/{logoproduct}', [HomeController::class, 'logoproduct'])->name('logo.product');
+require __DIR__ . '/auth.php';
 
 
 Route::resource('categories', 'CategoryController');

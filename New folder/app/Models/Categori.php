@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use App\Models\Categori;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ class Categori extends Model
 {
     use HasFactory;
 
-    protected $table = 'categoris';
+    protected $table = 'categories';
 
     protected $fillable = ['name'];
 }

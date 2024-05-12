@@ -1,10 +1,10 @@
 @extends('admin_product.layout_home')
 @section('content')
-  
+
 <div class="card" style="margin:20px;">
   <div class="card-header">Create New Product</div>
   <div class="card-body">
-       
+
       <form action="{{ route('admin_product.AddProduct') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label>Product_Name</label><br>
@@ -25,7 +25,8 @@
         <input type="text" name="type_logo" id="type_logo" class="form-control" required><br>
         <input type="submit" value="Thêm Sản Phẩm" class="btn btn-success"><br>
     </form>
-    
+
   </div>
 </div>
 @endsection
+
